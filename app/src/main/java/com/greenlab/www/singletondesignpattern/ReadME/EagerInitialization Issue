@@ -1,0 +1,33 @@
+---------------------------------------Singleton With Eager initialization:--------------------------------------------
+
+In eager initialization, the instance of Singleton Class is created at the time of class loading,
+this is the easiest method to create a singleton class.
+
+------------------------------------------------Example--------------------------------------------------------
+
+public class SingletonWithEagerInitialization {
+
+   // In eager initialization, the instance of Singleton Class is created at the time of class loading.
+    private static final SingletonWithEagerInitialization ourInstance = new SingletonWithEagerInitialization();
+
+    private SingletonWithEagerInitialization() {
+    }
+
+    public static String getString(){
+        return "Instance is created even we are not be using it by getInstance method."+ourInstance.hashCode();
+    }
+
+    public static SingletonWithEagerInitialization getInstance() {
+        return ourInstance;
+    }
+}
+
+------------------------------------------------Problem--------------------------------------------------------
+
+May lead to resource wastage. Because instance of class is created always, whether it is required or not.
+CPU time is also wasted in creation of instance if it is not required.
+
+------------------------------------------------Solution--------------------------------------------------------
+
+The solution is to create the new instance of the Singleton class, when needed.
+This can be achieved by Lazy Initialization.

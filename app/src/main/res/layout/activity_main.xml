@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+   <TextView
+       android:layout_width="match_parent"
+       android:layout_height="wrap_content"
+       android:text="Open Logcat \n Use Tag:- Singleton\n See HashCode for object"
+       android:textAlignment="center"
+       android:textColor="@android:color/black"
+       android:textSize="20dp"
+       android:padding="10dp"
+       android:background="#AFAEAB" />
+
+   <Button
+       android:id="@+id/btnSingletonEager"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="bottom|center"
+       android:layout_margin="20dp"
+       android:text="Singleton With Eager initialization:"
+       android:textAllCaps="false"/>
+
+   <Button
+       android:id="@+id/btnSingletonThread"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="bottom|center"
+       android:layout_margin="20dp"
+       android:text="Singleton in Multi-thread environment\n with Lazy initialization:"
+       android:textAllCaps="false"/>
+
+
+   <Button
+       android:id="@+id/btnSingletonReflection"
+       android:layout_width="wrap_content"
+       android:layout_height="wrap_content"
+       android:layout_gravity="bottom|center"
+       android:layout_margin="20dp"
+       android:text="Singleton With Reflection API"
+       android:textAllCaps="false"/>
+
+</LinearLayout>
