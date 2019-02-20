@@ -7,7 +7,10 @@ Ans:- *A Singleton class is a class which ensure that only one object(instance) 
 - Eager initialization
 - Lazy Instantiation
 - Double-checked locking – DCL
-- Reflection API
+- Reflection API     
+
+**-------------------------------------------------How it works------------------------------------------------------------**      
+![process](https://user-images.githubusercontent.com/43207796/53080430-aa105980-351e-11e9-93ad-5f3509bed0c4.JPG)
 
 # Eager initialization
 - *In eager initialization, the instance of Singleton Class is created at the time of class loading,
@@ -32,9 +35,12 @@ public class SingletonWithEagerInitialization {
     }
 }
 ```
+
 **-----------------------------------------------------------Problem-----------------------------------------------------------**   
 - *May lead to resource wastage. Because instance of class is created always, whether it is required or not.*   
 - *CPU time is also wasted in creation of instance if it is not required.*
+
+![eager](https://user-images.githubusercontent.com/43207796/53080449-b85e7580-351e-11e9-9860-301ed90c586b.PNG)
 
 **-----------------------------------------------------------Solution-----------------------------------------------------------**   
 - *The solution is to create the new instance of the Singleton class, when needed.
@@ -49,30 +55,17 @@ This can be achieved by Lazy Initialization.*
 This is called lazy instantiation.
 
 **-----------------------------------------------------------Example-----------------------------------------------------------**   
-```ruby
-class Singleton {
 
-// Step 1:
-    private static Singleton singleton;
+![single](https://user-images.githubusercontent.com/43207796/53080569-f8bdf380-351e-11e9-9b28-dc2fb81b44d6.JPG)   
 
-// Step 2:
-    private Singleton(){
-    }
-
-// Step 3:
-    public static Singleton getInstance(){
-        if(singleton==null){
-          singleton= new Singleton();
-        }
-        return singleton;
-    }
-}
-```
 **-----------------------------------------------------------Problem-----------------------------------------------------------**   
 - *In the above example if two or more threads calls the getInstance() method at same time,
 then singleton==null condition will be true for both the thread. So, two different instances
 of the same class will be created.That will break the singleton principle.
 That means our singleton class is not Thread safe.*
+
+![lazy](https://user-images.githubusercontent.com/43207796/53080464-c2807400-351e-11e9-9130-40a93ed8fbaf.PNG)   
+There is two object created for same class(see hashCode).It break the singleton principle.
 
 **-----------------------------------------------------------Solution-----------------------------------------------------------**   
 - **To overcome this problem, we need to create getInstance() method synchronized**
@@ -105,6 +98,7 @@ public class SingletonInMultiThread{
     }
 }
 ```
+
 **-----------------------------------------------------------Problem-----------------------------------------------------------**   
 *As we know only one Thread can enter synchronised block at a time.
 So in the above example if two or more Threads calls the getInstance() method at same time,
@@ -158,6 +152,9 @@ class SingletonDesignPatternWithDCL {
     }
 }
 ```   
+![dcl](https://user-images.githubusercontent.com/43207796/53080515-df1cac00-351e-11e9-9874-77cd2d35b5bc.PNG)   
+There is same object created for the Singleton class(see hashCode).
+
 # What is Java Reflection API.
 - *Reflection is an API which is used to examine or modify the behavior of methods, classes, interfaces at runtime.*
 
@@ -185,10 +182,13 @@ public class SingletonWithLazyInitialization {
     }
 }
 ```
+
 **----------------------------------------------------------Problem----------------------------------------------------------------**
 - Singleton with Java Reflection API   
 *We can create more than one instance of a Singleton class, by changing the visibility of constructor as public
 at run-time and create new instance using that constructor.That will break the singleton principle.*
+
+![reflection](https://user-images.githubusercontent.com/43207796/53080496-d4621700-351e-11e9-9bde-76da3f676735.PNG)
 
 **-----------------------------------------------------------Solution-------------------------------------------------------------**   
 - *To prevent singleton failure due to reflection we have to throw a run-time exception in constructor,
