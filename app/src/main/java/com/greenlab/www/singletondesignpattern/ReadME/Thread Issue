@@ -3,7 +3,13 @@ Ans:- A Singleton class is a class which ensure that only one object(instance) w
       be used in whole application.
 
 
-**-----------------------------Singleton design pattern with Lazy Instantiation in a single-threaded environment----------------------------------**
+**-----------------------------Lazy Instantiation in a single-threaded environment----------------------------------**
+
+In Lazy Instantiation the getInstance() method will check if there is any instance of that class is already created?
+If yes, then our method (getInstance()) will return that old instance.
+if not then it creates a new instance of the singleton class in JVM and returns that instance.
+Note:- The Singleton instance is not created until we call getInstance() method.
+This is called lazy instantiation.
 
 **Steps required to make Singleton Design Pattern**
 Step 1: Create a global instance
@@ -44,20 +50,18 @@ class Singleton {
     }
 }
 
--------------------------------------------------How it works-------------------------------------------------
-This getInstance() method will check if there is any instance of that class is already created?
-If yes, then our method (getInstance()) will return that old instance and if not then it creates a new instance of the singleton class in JVM and returns that instance.
-Note:- The Singleton instance is not created until we call getInstance() method.
-This is called lazy instantiation.
-
 ------------------------------------------------Problem--------------------------------------------------------
 In the above example if two or more threads calls the getInstance() method at same time,
 then singleton==null condition will be true for both the thread. So, two different instances
 of the same class will be created.That will break the singleton principle.
 That means our singleton class is not Thread safe.
 
-------------------------------------------------Solution----------------------------------------------------------
+------------------------------------------------Solution---------------------------------------------------------
 **To overcome this problem, we need to create getInstance() method synchronized**
+
+
+
+**------------------------------Lazy Instantiation in a multi-threaded environment----------------------------**
 
 Synchronized method allows only one thread to run at a time.
 When Thread 1 access synchronized method it acquires the lock.
@@ -66,8 +70,6 @@ Now after releasing the lock by thread 1 the thread 2 find that object is alread
 return object created by thread 1
 That means our singleton class is now Thread safe.
 
-
-**------------------------------Singleton design pattern with Lazy Instantiation in a multi-threaded environment----------------------------**
 
 **Steps required to make Singleton Design Pattern**
 Step 1: Same as above
@@ -103,12 +105,15 @@ So in the above example if two or more Threads calls the getInstance() method at
 then only one Thread at a time can access the getInstance() method another Thread 2 has to wait until one
 Thread 1 complete it work and releases the lock.which result into following issue:--
 
-*Slow performance because whether the Instance is null or not,
-the Thread has to wait.It’s a waste of time for Threads when (Instance!=null)
+*Slow performance because whether the Instance is null or not,the thread has to wait.
+It’s a waste of time for Threads when (Instance!=null)
 *Unnecessary synchronization that is not required once the object is initialized.
 
 ------------------------------------------------Solution------------------------------------------------------
 **We can overcome this issue if we use Double check locking method to create the singleton**
+
+
+--------------------------------------------Double-checked locking – DCL---------------------------------------
 
 Thread 1 and Thread 2 enters the getInstance() method in paralleled.They find instance variable is null(instance==null) at first time.
 Now Thread 1 and Thread 2 try to enters the synchronised block.But as we know only one thread can enter synchronised block at a time.
@@ -122,9 +127,6 @@ Thread 2 enters Synchronized block.
 Now Thread 2 finds Thread 1 has already create the new instance. So instance variable for Thread 2 is not null (instance!=null).
 So,Thread 2 does not enter into if(instance==null) block and get the same instance as created by Thread 1.
 
-
-
----------------------------------Singleton design pattern in a multi-threaded environment using Double-checked locking – DCL----------------------------
 
 **Steps required to make Singleton Design Pattern**
 Step 1: Create a global instance
@@ -176,4 +178,4 @@ class SingletonDesignPatternWithDCL {
 #Where we use Singleton Design Pattern.
 Database Connection
 This FirebaseDatabase uses a Singleton
-FirebaseDatabase.getInstance() ex of singleton
+FirebaseDatabase.getInstance() Ex of singleton

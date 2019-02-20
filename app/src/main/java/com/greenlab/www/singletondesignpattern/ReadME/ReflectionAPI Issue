@@ -1,17 +1,6 @@
 What is Java Reflection API.
 Reflection is an API which is used to examine or modify the behavior of methods, classes, interfaces at runtime.
 
-------------------------------------------------Problem--------------------------------------------------------
-....................................Singleton with Java Reflection API.........................................
-
-We can create more than one instance of a Singleton class, by changing the visibility of constructor as public
-at run-time and create new instance using that constructor.That will break the singleton principle.
-
-------------------------------------------------Solution--------------------------------------------------------
-
-To prevent singleton failure due to reflection we have to throw a run-time exception in constructor,
-if the constructor is already initialized and some class try to initialize it again.
-
 ------------------------------------------------Example--------------------------------------------------------
 
 public class SingletonWithLazyInitialization {
@@ -35,3 +24,14 @@ public class SingletonWithLazyInitialization {
         return singletonWithLazyInitialization;
     }
 }
+
+------------------------------------------------Problem--------------------------------------------------------
+....................................Singleton with Java Reflection API.........................................
+
+We can create more than one instance of a Singleton class, by changing the visibility of constructor as public
+at run-time and create new instance using that constructor.That will break the singleton principle.
+
+------------------------------------------------Solution--------------------------------------------------------
+
+To prevent singleton failure due to reflection we have to throw a run-time exception in constructor,
+if the constructor is already initialized and some class try to initialize it again.
